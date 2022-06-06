@@ -84,6 +84,7 @@ cancelledops <- cancelledops %>%
 
 ##calculated fields: performed (planned - cancelled), and % calculations 
 ##(cancellations by type as % of all planned ops and as a % of canceled operations)
+##create unique identifier
 cancelledops <- cancelledops %>%
   mutate(Performed=TotalOperations-TotalCancelled) %>%
   mutate(Cancelled_By_Patient_pc_of_planned_ops=CancelledByPatientReason/TotalOperations*100) %>%
@@ -93,12 +94,13 @@ cancelledops <- cancelledops %>%
   mutate(Cancelled_By_Patient_pc_of_cancelled_ops=CancelledByPatientReason/TotalCancelled*100) %>%
   mutate(Cancelled_clinical_reason_pc_of_cancelled_ops=ClinicalReason/TotalCancelled*100) %>%
   mutate(Non_clinical_capacity_reason_pc_of_cancelled_ops=NonClinicalCapacityReason/TotalCancelled*100) %>%
-  mutate(Other_Reason_pc_of_cancelled_ops=OtherReason/TotalOperations*100)
+  mutate(Other_Reason_pc_of_cancelled_ops=OtherReason/TotalOperations*100) %>%
+  mutate(ID=paste0(Date1,HBT,sep = ""))
 
 
 
 ## new data frame with selected columns
-CancelledPlannedOps <- cancelledops[c("Date2", "Month","Year","HBT","HBName","TotalOperations","TotalCancelled","Performed",
+cancelledops <- cancelledops[c("Date2", "ID", "Month","Year","HBT","HBName","TotalOperations","TotalCancelled","Performed",
                                                "CancelledByPatientReason","ClinicalReason","NonClinicalCapacityReason","OtherReason","Cancelled_By_Patient_pc_of_planned_ops",
                                               "Cancelled_clinical_reason_pc_of_planned_ops","Non_clinical_capacity_reason_pc_of_planned_ops","Other_Reason_pc_of_planned_ops",
                                              "Cancelled_By_Patient_pc_of_cancelled_ops","Cancelled_clinical_reason_pc_of_cancelled_ops","Non_clinical_capacity_reason_pc_of_cancelled_ops","Other_Reason_pc_of_cancelled_ops")]
@@ -107,6 +109,6 @@ CancelledPlannedOps <- cancelledops[c("Date2", "Month","Year","HBT","HBName","To
 
 ## write csv cancelled ops by health board, new data scraped after automation will be appended
 
-write.table(CancelledPlannedOps, "data/Cancelled_Ops_by_HB.csv", 
+write.table(cancelledops, "data/Cancelled_Ops_by_HB.csv", 
             sep = ",", col.names = !file.exists("Cancelled_Ops_by_HB.csv"),
             append = T, row.names = F)
