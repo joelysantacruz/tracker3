@@ -225,8 +225,8 @@ write.csv(cancelledops, "data/Cancelled_Ops_by_HB.csv", row.names = FALSE)
 write.csv(hospitalmapbase, "data/Cancelled_Ops_by_Hospital.csv", row.names = FALSE) 
 
 ## 3. individual time series by hospital
-group_by(CBHOS, filename) %>%
-  do(write_csv(., paste0(unique(.$filename), 
-                         file = "data/timeseries.csv")))
+CBHOS %>% 
+  group_by(filename) %>% 
+  group_walk(~ write_csv(.x, paste0("/data", .y$filename, ".csv")))
 
 
