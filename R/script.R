@@ -107,8 +107,8 @@ cancelledops <- cancelledops[c("Date2", "ID", "Month","Year","HBT","HBName","Tot
 
 
 
-## write csv cancelled ops by health board, new data scraped after automation will be appended
+## write csv 
+write.csv(cancelledops,
+            file = "data/Cancelled_Ops_by_HB.csv",
+            fileEncoding = "UTF-8", row.names=FALSE)
 
-write.table(cancelledops, "data/Cancelled_Ops_by_HB.csv", 
-            sep = ",", col.names = !file.exists("Cancelled_Ops_by_HB.csv"),
-            append = T, row.names = F)
