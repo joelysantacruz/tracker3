@@ -227,6 +227,6 @@ write.csv(hospitalmapbase, "data/Cancelled_Ops_by_Hospital.csv", row.names = FAL
 ## 3. individual time series by hospital
 CBHOS %>% 
   group_by(filename) %>% 
-  group_walk(~ write_csv(.x, paste0("/data", .y$filename, ".csv")))
+  write_csv(.x, paste0("/data", .y$filename, ".csv"))
 
 
