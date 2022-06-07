@@ -1,9 +1,9 @@
 ##libraries
 library(curl)
 library(tidyverse)
+library(plyr)  
 library(dplyr)
-library(lubridate)
-library(plyr)                                     
+library(lubridate)                        
 library(readr)   
 
 
