@@ -94,13 +94,12 @@ cancelledops <- cancelledops %>%
   mutate(Cancelled_By_Patient_pc_of_cancelled_ops=CancelledByPatientReason/TotalCancelled*100) %>%
   mutate(Cancelled_clinical_reason_pc_of_cancelled_ops=ClinicalReason/TotalCancelled*100) %>%
   mutate(Non_clinical_capacity_reason_pc_of_cancelled_ops=NonClinicalCapacityReason/TotalCancelled*100) %>%
-  mutate(Other_Reason_pc_of_cancelled_ops=OtherReason/TotalOperations*100) %>%
-  mutate(ID=paste0(Date1,HBT,sep = ""))
+  mutate(Other_Reason_pc_of_cancelled_ops=OtherReason/TotalOperations*100)
 
 
 
 ## new data frame with selected columns
-cancelledops <- cancelledops[c("Date2", "ID", "Month","Year","HBT","HBName","TotalOperations","TotalCancelled","Performed",
+cancelledops <- cancelledops[c("Date2", "Month","Year","HBT","HBName","TotalOperations","TotalCancelled","Performed",
                                                "CancelledByPatientReason","ClinicalReason","NonClinicalCapacityReason","OtherReason","Cancelled_By_Patient_pc_of_planned_ops",
                                               "Cancelled_clinical_reason_pc_of_planned_ops","Non_clinical_capacity_reason_pc_of_planned_ops","Other_Reason_pc_of_planned_ops",
                                              "Cancelled_By_Patient_pc_of_cancelled_ops","Cancelled_clinical_reason_pc_of_cancelled_ops","Non_clinical_capacity_reason_pc_of_cancelled_ops","Other_Reason_pc_of_cancelled_ops")]
