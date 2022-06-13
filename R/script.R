@@ -104,7 +104,7 @@ cancelledops <- cancelledops[c("Date2", "Month","Year","HBT","HBName","TotalOper
                                "Cancelled_clinical_reason_pc_of_planned_ops","Non_clinical_capacity_reason_pc_of_planned_ops","Other_Reason_pc_of_planned_ops",
                                "Cancelled_By_Patient_pc_of_cancelled_ops","Cancelled_clinical_reason_pc_of_cancelled_ops","Non_clinical_capacity_reason_pc_of_cancelled_ops","Other_Reason_pc_of_cancelled_ops")]
 
-write.csv(cancelledops, "data/test.csv", row.names = FALSE)
+write.csv(cancelledops, "data/Cancelled_Ops_by_HB.csv", row.names = FALSE)
 
 
 ## write csv 
