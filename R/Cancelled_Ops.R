@@ -289,10 +289,10 @@ hospitalmapbase <- hospitalmapbase %>%
 ##Export CSVs
 
 ## 1. cancelled ops by healthboard
-write.csv(cancelledops, "data/cancelled_by_HB.csv", row.names = FALSE)
+write.csv(cancelledops, "data/cancelled_ops/cancelled_by_HB.csv", row.names = FALSE)
 
 ## 2. hospital map base 
-write.csv(hospitalmapbase, "data/map_base.csv", row.names = FALSE) ## all hospitals
+write.csv(hospitalmapbase, "data/cancelled_ops/map_base.csv", row.names = FALSE) ## all hospitals
 
 ## test github
 
@@ -303,4 +303,4 @@ for(i in unique(CBHOS$TreatmentLocationCode)) {
 
 files <- mget(ls())
 
-write.csv(files[[i]], paste(names(files[i]), ".csv", sep = ""), row.names=FALSE)
+write.csv(files[[i]], paste(names(files[i]), "data/cancelled_ops/hospitals/.csv", sep = ""), row.names=FALSE)
