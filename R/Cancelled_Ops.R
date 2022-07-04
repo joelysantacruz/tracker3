@@ -295,12 +295,15 @@ write.csv(cancelledops, "data/cancelled_ops/cancelled_by_HB.csv", row.names = FA
 write.csv(hospitalmapbase, "data/cancelled_ops/map_base.csv", row.names = FALSE) ## all hospitals
 
 ## test github
+CBHOS %>% 
+  group_by(TreatmentLocationCode) %>% 
+  group_walk(~ write_csv(.x, paste0(.y$TreatmentLocationCode, "data/cancelled_ops.csv")))
 
-for(i in unique(CBHOS$TreatmentLocationCode)) {
-  nam <- paste("Hospital", i, sep = ".")
-  assign(nam, CBHOS[CBHOS$TreatmentLocationCode==i,])
-}
+##for(i in unique(CBHOS$TreatmentLocationCode)) {
+##  nam <- paste("Hospital", i, sep = ".")
+##  assign(nam, CBHOS[CBHOS$TreatmentLocationCode==i,])
+##}
 
-files <- mget(ls())
+##files <- mget(ls())
 
-write.csv(files[[i]], paste(names(files[i]), "data/cancelled_ops/hospitals/.csv", sep = ""), row.names=FALSE)
+##write.csv(files[[i]], paste(names(files[i]), "data/cancelled_ops/hospitals/.csv", sep = ""), row.names=FALSE)
