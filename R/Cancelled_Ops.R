@@ -297,7 +297,7 @@ write.csv(hospitalmapbase, "data/cancelled_ops/map_base.csv", row.names = FALSE)
 ## test github
 CBHOS %>% 
   group_by(TreatmentLocationCode) %>% 
-  group_walk(~ write_csv(.x, paste0(.y$TreatmentLocationCode, "data/cancelled_ops.csv")))
+  group_walk(~ write_csv(.x, paste0(.y$TreatmentLocationCode, "data/cancelled_ops/.csv")))
 
 ##for(i in unique(CBHOS$TreatmentLocationCode)) {
 ##  nam <- paste("Hospital", i, sep = ".")
