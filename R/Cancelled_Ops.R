@@ -297,13 +297,17 @@ write.csv(hospitalmapbase, "data/cancelled_ops/map_base.csv", row.names = FALSE)
 ## test github
 CBHOS %>% 
   group_by(TreatmentLocationCode) %>% 
-  group_walk(~ write_csv(.x, paste0(.y$TreatmentLocationCode, "data/cancelled_ops/.csv")))
+  group_walk(~ write_csv(.x, paste0("data/cancelled_ops/hospitals/", .y$TreatmentLocationCode, ".csv")))
 
-##for(i in unique(CBHOS$TreatmentLocationCode)) {
-##  nam <- paste("Hospital", i, sep = ".")
-##  assign(nam, CBHOS[CBHOS$TreatmentLocationCode==i,])
-##}
 
-##files <- mget(ls())
+##write.csv(res[[2]], 
+           ## paste0("output-data/alternative-exports-by-non-iso-week/excess-deaths/", country, "_excess_deaths.csv"),
+            ##fileEncoding = "UTF-8",row.names=FALSE)
 
-##write.csv(files[[i]], paste(names(files[i]), "data/cancelled_ops/hospitals/.csv", sep = ""), row.names=FALSE)
+
+
+
+
+
+
+
