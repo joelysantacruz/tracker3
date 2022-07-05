@@ -1,0 +1,42 @@
+name: compare dataframes 
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push
+jobs: 
+  validate:
+    runs-on: windows-latest
+# Load repo and install R
+    steps:
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+# Load libraries
+    - name: Install packages
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+          install.packages(c(
+            "curl",
+            "tidyverse"
+          ))
+      shell: Rscript {0}
+         
+    # Run scripts
+    - name: Column names
+      run: |
+          source('data-validation.R')
+      shell: Rscript {0}
+    
+    
+      
+ # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name actions-user
+        git config --local user.email "actions@github.com"
+        git add data/*
+        git commit -am "GH ACTION Headlines $(date)"
+        git push origin main
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: github-actions
