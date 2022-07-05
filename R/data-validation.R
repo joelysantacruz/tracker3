@@ -8,7 +8,7 @@ library(tidyverse)
 location_lookups <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same in locations, all scripts affected')
+      stop('Warning: Names are not the same in locations, all scripts affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
@@ -76,7 +76,7 @@ location_lookups(CA_PHS, CA_GH)
 delayed_discharges <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same, delayed discharges affected')
+      stop('Warning: Names are not the same, delayed discharges affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
@@ -104,7 +104,7 @@ delayed_discharges(DDHB_PHS, DDHB_GH)
 beds_info <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same, beds info affected')
+      stop('Warning: Names are not the same, beds info affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
@@ -133,7 +133,7 @@ beds_info(BIHB_PHS, BIHB_GH)
 hospitals_lookup <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same for hospital locations, cancelled ops and A&E waits affected')
+      stop('Warning: Names are not the same for hospital locations, cancelled ops and A&E waits affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
@@ -179,7 +179,7 @@ hospitals_lookup(aesites_PHS, aesites_GH)
 aewt <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same, A&E waiting times affected')
+      stop('Warning: Names are not the same, A&E waiting times affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
@@ -208,7 +208,7 @@ aewt(AEWT_PHS, AEWT_GH)
 cancelled_ops <- function(x,y) {
   for (i in names(x)) {
     if (!(i %in% names(y))) {
-      print('Warning: Names are not the same, cancelled ops scripts affected')
+      stop('Warning: Names are not the same, cancelled ops scripts affected')
       break
     }  
     else if(i==tail(names(y),n=1)) {
