@@ -24,7 +24,7 @@ jobs:
     # Run scripts
     - name: Column names
       run: |
-          source('data-validation.R')
+          source('R/data-validation.R')
       shell: Rscript {0}
     
     
