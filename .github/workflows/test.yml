@@ -46,24 +46,24 @@ jobs:
             "Rcpp",
             "sf"
           ))
-        shell: Rscript {0}
+      shell: Rscript {0}
 
-      - name: Run script
-        run: |
+    - name: Run script
+      run: |
           source('R/Cancelled_Ops.R')
-        shell: Rscript {0}
+      shell: Rscript {0}
       
 
 
 
-      - name: Commit files
-        run: |
+    - name: Commit files
+      run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit --allow-empty -m "Data auto-update" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@8407731efefc0d8f72af254c74276b7a90be36e1
-        with:
+    - name: Push changes
+      uses: ad-m/github-push-action@8407731efefc0d8f72af254c74276b7a90be36e1
+      with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
 
