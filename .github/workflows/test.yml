@@ -5,34 +5,38 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
-    env:
-      S3_FOLDER: tracker3
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_VERSION: 4.0.3
+    runs-on: windows-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+      
 
-      - name: Set up R
-        uses: r-lib/actions/setup-r@12d5b556c504a4be89f0dc9779e0de65bf0cfa44
-        with:
-          r-version: ${{ env.R_VERSION }}
 
-      - name: Set up Ubuntu packages
-        run: sudo apt-get install libcurl4-openssl-dev
+    - name: Set up R
+      uses: r-lib/actions/setup-r@12d5b556c504a4be89f0dc9779e0de65bf0cfa44
+      with:
+        r-version: ${{ env.R_VERSION }}
 
-      - name: Cache R packages
-        id: cache
-        uses: actions/cache@v2
-        with:
+    - name: Install dependencies
+      run: |
+          
+            sudo apt-get install libproj-dev proj-data proj-bin
+            sudo apt-get install libgeos-dev
+            sudo apt-get install gdal-bin libgdal-dev libgdal-doc
+            pip install wheel
+            pip install flake8 pytest Cython numpy proj geos GDAL==3.2.3
+
+    - name: Cache R packages
+      id: cache
+      uses: actions/cache@v2
+      with:
           path: ${{ env.R_LIBS_USER }}
           key: r-v1-${{ env.R_VERSION }}
           restore-keys: r-v1
 
-      - name: Install packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
+    - name: Install packages
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
           install.packages(c(
             "tidyverse",
             "dplyr",
