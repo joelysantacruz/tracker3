@@ -1,6 +1,5 @@
 name: update
 on:
-
   workflow_dispatch:
 
 jobs:
